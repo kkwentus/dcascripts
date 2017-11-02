@@ -1,0 +1,7 @@
+case node['os']
+when 'linux'
+  include_recipe 'os-hardening'
+  execute 'chown -R root:root /var/log'
+when 'windows'
+  include_recipe 'windows-hardening'
+end

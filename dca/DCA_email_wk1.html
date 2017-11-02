@@ -1,0 +1,197 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "https://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+
+<head>
+  <meta http-equiv=Content-Type content="text/html; charset=UTF-8">
+  <style type="text/css" nonce="sQN/6LLpIulAh3zwXQD0zIsradQ">
+    body,
+    td,
+    div,
+    p,
+    a,
+    input {
+      font-family: arial, sans-serif;
+    }
+  </style>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chef Software, Inc Mail - URGENT - Security patch needed ASAP!</title>
+  <style type="text/css" nonce="sQN/6LLpIulAh3zwXQD0zIsradQ">
+    body,
+    td {
+      font-size: 13px
+    }
+
+    a:link,
+    a:active {
+      color: #1155CC;
+      text-decoration: none
+    }
+
+    a:hover {
+      text-decoration: underline;
+      cursor: pointer
+    }
+
+    a:visited {
+      color: ##6611CC
+    }
+
+    img {
+      border: 0px
+    }
+
+    pre {
+      white-space: pre;
+      white-space: -moz-pre-wrap;
+      white-space: -o-pre-wrap;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      max-width: 800px;
+      overflow: auto;
+    }
+
+    .logo {
+      left: -7px;
+      position: relative;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bodycontainer">
+    <table width=100% cellpadding=0 cellspacing=0 border=0>
+      <tr height=14px>
+        <td width=143><img src="https://www.google.com/a/chef.io/images/logo.gif" width=143 height=59 alt="Chef Software, Inc Mail" class="logo"></td>
+        <td align=right>
+          <font size=-1 color=#777><b> Hubert J. Farnsworth &lt;farnsworthy@chef.io&gt;</b></font>
+        </td>
+      </tr>
+    </table>
+    <hr>
+    <div class="maincontent">
+      <table width=100% cellpadding=0 cellspacing=0 border=0>
+        <tr>
+          <td>
+            <font size=+1><b>IMPORTANT: Automation Initiative!</b></font><br></td>
+        </tr>
+      </table>
+      <hr>
+      <table width=100% cellpadding=0 cellspacing=0 border=0 class="message">
+        <tr>
+          <td>
+            <font size=-1><b>SysOps </b>&lt;sysops@chef.io&gt;</font>
+          </td>
+          <td align=right>
+            <font size=-1>Wed, May 3, 2017 at 10:36 PM</font>
+            <tr>
+              <td colspan=2>
+                <font size=-1 class="recipient">
+                  <div>To: Systems Operations &lt;sysops@chef.io&gt;</div>
+                </font>
+                <tr>
+                  <td colspan=2>
+                    <table width=100% cellpadding=12 cellspacing=0 border=0>
+                      <tr>
+                        <td>
+                          <div style="overflow: hidden;">
+                            <font size=-1>
+                              <div dir="ltr">
+                                <div>Good news, everyone!</div>
+                                <div><br></div>
+                                <div>Over the next few weeks, we'll finally be starting our Automation initiative! By the end of the month, I'd like to see our main site configurations deployed with chef.<br></div>
+                                <div><br></div>
+                                <div>Last night, Conrad got things started, and he thinks we'll be able to hit that target. Find his instructions below for what to do next.<br></div>
+                                <div>----------------------------<br><br></div>
+                                <div>Okay, I've kicked things off. I've set up a Chef Automate server in our datacenter, and have "bootstrapped" all of our servers. They can report into Chef Automate, but Chef is not yet making any changes.<br></div>
+                                <div>To start, our Chef rep suggested we use the <a href="https://supermarket.chef.io/cookbooks/audit">Audit Cookbook</a> to scan our nodes, and see how securely they're set up. I haven't yet defined our security requirements, but I'm told the Automate server contains a "Baseline Security" scan we can use for the time being to get a baseline.<br></div>
+                                <div>I've installed Chef's Development Kit on our shared workstation, and you'll be using two tools primarily:<br></div>
+                                <div><br><b>knife:</b> A commandline utility for querying our fleet, and applying changes to their configs.<br></div>
+                                <div><b>kitchen:</b> A testing utility we can use to evaluate changes before we run them on our servers.
+                                <div><br>Here's what you need to do:<br></div>
+                                  <ol>
+                                    <li>Log in to <a href="https://automate.automate-demo.com/viz/#/" target="_blank" data-saferedirecturl="https://www.google.com/url?hl=en&amp;q=https://automate.automate-demo.com/viz/%23/&amp;source=gmail&amp;ust=1493957343362000&amp;usg=AFQjCNG7sDbbG-xnjFuR9tWi_-E3bH2nGQ">Chef Automate</a> and install the "DevSec Linux Security Baseline" from the "Profile Store" in the "Compliance" tab</li>
+                                    <li>You should find a copy of the dca_baseline cookbook in the dev workstation's home directory. Navigate to its folder, and run "kitchen converge". This will launch a test instance using our base image, and run that security scan. When complete, you should be able to see the results in the Automate UI.</li>
+                                    <li>Update "dev1" and "dev2" to run audits. This is done by updating their "run list", and can be done like so with knife: "knife node run_list add NODE_NAME '''recipe[dca_baseline]''' "
+                                    <li>If the test works, ensure that the "dca_baseline" cookbook is part of our development machines' run lists, and run the chef client on them. You can do this for the whole dev environment with the command "knife ssh 'chef_environment:development' 'sudo chef-client'". This will search for all development servers, and run the chef client on them over SSH.
+                                  </ol>
+                                </div>
+                                <div>That'll be it for week 1! If we discover that any scans are failing, we'll strategize on correcting those issues in Week 2.<br><br></div>
+                                <div>----------------------------<br><br></div>
+                                <div class="m_254040083320320785gmail_signature">
+                                  <div dir="ltr">
+                                    <div>
+                                      <div dir="ltr">
+                                        <div>
+                                          <div dir="ltr">
+                                            <div>
+                                              <div dir="ltr">
+                                                <div>
+                                                  <div dir="ltr">
+                                                    <div>
+                                                      <div dir="ltr">
+                                                        <div>
+                                                          <div dir="ltr">
+                                                            <div>
+                                                              <div dir="ltr">
+                                                                <div style="font-size:12.8px"><b style="font-family:arial,sans-serif;font-size:12.8px">HUBERT J FARNSWORTH</b><span style="font-family:arial,sans-serif;font-size:12.8px"> — VP, IT Operations</span></div>
+                                                                <div style="font-size:12.8px">
+                                                                  <p style="margin:0px 0px 8px;font-family:arial,sans-serif;font-size:11px;white-space:nowrap;color:rgb(105,117,130)">farnsworthy<a href="mailto:sysops@chef.io" style="color:rgb(105,117,130)" target="_blank">@chef.io</a> – <b>my: </b><a href="https://chef.zoom.us/j/5919713675" target="_blank" data-saferedirecturl="https://www.google.com/url?hl=en&amp;q=https://chef.zoom.us/j/5919713675&amp;source=gmail&amp;ust=1493957343362000&amp;usg=AFQjCNGjgy8xNxHBlHPTbUzFy9BgfYg0NQ">Zoom</a>                                                                    <a href="https://www.linkedin.com/pub/jody-wolfborn/95/223/174" target="_blank" data-saferedirecturl="https://www.google.com/url?hl=en&amp;q=https://www.linkedin.com/pub/jody-wolfborn/95/223/174&amp;source=gmail&amp;ust=1493957343362000&amp;usg=AFQjCNG44m35e8AHVropFVDTZ6Gw8gCstw">Lin<wbr>kedIn</a></p>
+                                                                  <table border="0" cellpadding="0" cellspacing="0" style="font-size:12.8px;width:300px">
+                                                                    <tbody>
+                                                                      <tr>
+                                                                        <td align="left" valign="middle" style="padding:4px 0px;border-top:1px solid rgb(217,221,224);border-bottom:1px solid rgb(217,221,224)">
+                                                                          <table border="0" cellpadding="0" cellspacing="0">
+                                                                            <tbody>
+                                                                              <tr>
+                                                                                <td
+                                                                                  <div style="margin:0px 2px 0px 0px;padding:0px;font-family:arial,sans-serif;font-size:48px;letter-spacing:2px;font-weight:bold;color:rgb(67,83,99)">CHEF</div>
+                                                                                </td>
+                                                                                <td valign="top">
+                                                                                  <p style="margin:8px 0px 0px;padding:0px;font-family:arial,sans-serif;font-size:8px;color:rgb(67,83,99)">TM</p>
+                                                                                </td>
+                                                                              </tr>
+                                                                            </tbody>
+                                                                          </table>
+                                                                        </td>
+                                                                      </tr>
+                                                                      <tr>
+                                                                        <td>
+                                                                          <p style="margin:8px 0px;font-family:arial,sans-serif;font-size:11px;white-space:nowrap;color:rgb(105,117,130)"><b><a href="http://www.chef.io/" style="color:rgb(105,117,130)" target="_blank" data-saferedirecturl="https://www.google.com/url?hl=en&amp;q=http://www.chef.io/&amp;source=gmail&amp;ust=1493957343362000&amp;usg=AFQjCNH7GU3_snsX4mvX7rynQBiKCHjglA">chef.io</a></b>                                                                            <a href="http://www.getchef.com/blog/" style="color:rgb(105,117,130)" target="_blank" data-saferedirecturl="https://www.google.com/url?hl=en&amp;q=http://www.getchef.com/blog/&amp;source=gmail&amp;ust=1493957343363000&amp;usg=AFQjCNGG0hqkhKAfLKm_TSf7ZaGtGailPQ">Blog</a>                                                                            <a href="https://www.facebook.com/getchefdotcom" style="color:rgb(105,117,130)" target="_blank" data-saferedirecturl="https://www.google.com/url?hl=en&amp;q=https://www.facebook.com/getchefdotcom&amp;source=gmail&amp;ust=1493957343363000&amp;usg=AFQjCNEFXcg8aekWLqtiO89Ulw9Q3TGVbQ">Facebook</a>                                                                            <a href="https://twitter.com/getchefdotcom" style="color:rgb(105,117,130)" target="_blank" data-saferedirecturl="https://www.google.com/url?hl=en&amp;q=https://twitter.com/getchefdotcom&amp;source=gmail&amp;ust=1493957343363000&amp;usg=AFQjCNF2SbKD3lEyjJtFKwVzStMgIKYYyw">Tw<wbr>itter</a>                                                                            <a href="https://www.youtube.com/getchef" style="color:rgb(105,117,130)" target="_blank" data-saferedirecturl="https://www.google.com/url?hl=en&amp;q=https://www.youtube.com/getchef&amp;source=gmail&amp;ust=1493957343363000&amp;usg=AFQjCNGHsZAlnIqJ2s4OBrB_1a7vH-Zunw">Youtube</a></p>
+                                                                        </td>
+                                                                      </tr>
+                                                                    </tbody>
+                                                                  </table>
+                                                                  <div style="font-size:12.8px"><br></div>
+                                                                  <div style="font-size:12.8px"><a href="https://www.youtube.com/watch?v=pW48v1xAPyI" target="_blank" data-saferedirecturl="https://www.google.com/url?hl=en&amp;q=https://www.youtube.com/watch?v%3DpW48v1xAPyI&amp;source=gmail&amp;ust=1493957343363000&amp;usg=AFQjCNGCMOwCFpBJLYxMimfE1_P1Z8hwkQ">Watch the ChefConf 2016 Keynotes and Sessions!<br></a></div>
+                                                                </div>
+                                                              </div>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                    <a href="http:///" target="_blank" data-saferedirecturl="https://www.google.com/url?hl=en&amp;q=http:///&amp;source=gmail&amp;ust=1493957343363000&amp;usg=AFQjCNH-rhqbd-GhVKdxab326rtzzC0m2A"></a>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </font>
+                          </div>
+                    </table>
+      </table>
+    </div>
+  </div>
+  <script type="text/javascript" nonce="sQN/6LLpIulAh3zwXQD0zIsradQ">
+    // <![CDATA[
+    // ]]>
+  </script>
+</body>
+
+</html>
