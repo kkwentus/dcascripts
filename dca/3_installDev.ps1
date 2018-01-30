@@ -1,0 +1,2 @@
+Update-RunLists development install_site
+Invoke-ChefClient development
