@@ -1,1 +1,1 @@
-git clone https://gitlab.com/kkwentus/dca-files.git
+git clone https://github.com/kkwentus/dcascripts.git
